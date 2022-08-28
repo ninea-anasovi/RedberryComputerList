@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
-import Form from './components/pages/form';
+import WizardForm from './components/pages/wizardFrom';
 import Home from './components/pages/home';
 import List from './components/pages/list';
 
@@ -9,7 +9,7 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/form' element={<Form />}/>
+        <Route path='/form' element={<WizardForm />}/>
         <Route path='/list' element={<List />}/>
       </Routes>
     </div>
