@@ -1,10 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import AxiosBootstrap from './bootstrap/AxiosBootstrap';
 import WizardForm from './components/pages/wizardFrom';
 import Home from './components/pages/home';
 import List from './components/pages/list';
 import InfoPage from './components/pages/InfoPage';
-import AxiosBootstrap from './bootstrap/AxiosBootstrap';
+import Finished from './components/pages/finished';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/form' element={<WizardForm />}/>
         <Route path='/list' element={<List />}/>
         <Route path='/details' element={<InfoPage />}/>
+        <Route path='/finished' element={<Finished />}/>
       </Routes>
     </div>
   );

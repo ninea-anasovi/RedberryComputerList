@@ -1,22 +1,37 @@
 import React, { Children } from 'react'
-import {Formik, Form, FormikConfig, FormikValues} from 'formik'
-import { useState } from 'react'
+import {Formik, Form, Field, FormikConfig, FormikValues} from 'formik'
 import icon from '../../../assets/images/icon.svg'
 import EmployeeDetails from './EmployeeDetails'
 import ComputerDetails from './ComputerDetails'
+import { useState } from 'react'
+
 
 function WizardForm() {
   return (
     <div className='bg-[#F7F7F7] py-8 h-full '>
       <div className='rounded-lg bg-white md:mx-40 md:px-32 py-8'>
-        <FormikStepper
-        onSubmit={() => {}}>
-              <div>
-                <EmployeeDetails/>
-              </div>
-              <div>
-                <ComputerDetails/>
-              </div>
+        <FormikStepper 
+          initialValues={{ 
+            name: '',
+            surname: '',
+            team_id: 0,
+            position_id: 0,
+            phone_number: '',
+            email: '',
+            laptop_name: '',
+            laptop_image: '',
+            laptop_brand_id: 0,
+            laptop_cpu: '',
+            laptop_cpu_cores: 0,
+            laptop_cpu_threads: 0,
+            laptop_ram: 0,
+            laptop_hard_drive_type: '',
+            laptop_state: '',
+            laptop_price: 0 }}
+          
+          onSubmit={() => {}}>
+          <EmployeeDetails/>
+          <ComputerDetails/>
         </FormikStepper>
       </div>
       <img src={icon} alt='Redberry Icon' className='ml-auto mr-auto mt-8 w-16'/>
