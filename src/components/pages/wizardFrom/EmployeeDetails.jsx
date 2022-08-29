@@ -1,20 +1,21 @@
 import axios from 'axios'
 import React from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import FormDropdown from './FormDropdown'
 import FormInput from './FormInput'
 
 
 function EmployeeDetails() {
-    var teams = []
-    var positions = []
+    const [teams, setTeams] = useState([])
+    const [positions, setPositions] = useState([])
+
     useEffect(()=>{
         axios.get('/teams').then(response => {
-            teams = response.data
-            console.log(teams)
+            setTeams(response.data.data)
         }).catch(error => console.log(error))
         axios.get('/positions').then(response => {
-            positions = response.data
+            setPositions(response.data.data)
         }).catch(error => console.log(error))
     },[])
 

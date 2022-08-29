@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import { useState } from 'react'
 import { useEffect } from 'react'
 import FormDropdown from './FormDropdown'
 import FormInput from './FormInput'
@@ -7,18 +8,18 @@ import FormToggle from './FormToggle'
 import FormUpload from './FormUpload'
 
 function ComputerDetails() {
-    let laptopBrandId = []
-    let LaptopCPU = []
+    const [ laptopBrandId, setLaptopBrandID ] = useState([])
+    const [laptopCPU, setLaptopCPU] = useState([])
     useEffect(()=>{
-        axios.get('/teams').then(response => {
-            laptopBrandId = response.data
-            console.log(laptopBrandId)
+        axios.get('/brands').then(response => {
+            setLaptopBrandID(response.data.data)
         }).catch(error => console.log(error))
-        axios.get('/positions').then(response => {
-            LaptopCPU = response.data
+        
+        axios.get('/cpus').then(response => {
+            setLaptopCPU(response.data.data)
         }).catch(error => console.log(error))
-    },[])
-    
+    }, [] )
+
     return (
         <div>
             <FormUpload/>
@@ -27,7 +28,7 @@ function ComputerDetails() {
             <FormDropdown fieldName={'laptop_brand_id'} label={'ლეპტოპის ბრენდი'} options={laptopBrandId}/>
             </div>  
             <div className='grid md:grid-cols-3 md:gap-6 items-center border-t border-gray-300 mt-8'>
-            <FormDropdown fieldName={'laptop_cpu'} label={'CPU'} options={LaptopCPU}/>
+            <FormDropdown fieldName={'laptop_cpu'} label={'CPU'} options={laptopCPU}/>
             <FormInput fieldName={'laptop_cpu_cores'} label={'CPU-ს ბირთვი'} placeholder={'14'} text={'მხოლოდ ციფრები'}/>
             <FormInput fieldName={'laptop_cpu_threads'} label={'CPU-ს ნაკადი'} placeholder={'365'} text={'მხოლოდ ციფრები'}/>
             </div>
