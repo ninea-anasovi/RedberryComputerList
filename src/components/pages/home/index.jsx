@@ -2,8 +2,10 @@ import React from 'react'
 import Logo from '../../../assets/images/LOGO.svg'
 import HeroImage from '../../../assets/images/hero-image.png'
 import { Link } from "react-router-dom"
+import axios from 'axios'
 
 function Home() {
+
   return (
     <div className='my-16'>
         <div>
