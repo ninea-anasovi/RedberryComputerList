@@ -4,41 +4,55 @@ import icon from '../../../assets/images/icon.svg'
 import EmployeeDetails from './EmployeeDetails'
 import ComputerDetails from './ComputerDetails'
 import { useState } from 'react'
+import * as Yup from "yup";
 
 
 function WizardForm() {
   const [step, setStep] = useState(0)
+  const initialValues = Yup.object({
+    name: '',
+    surname: '',
+    team_id: 0,
+    position_id: 0,
+    phone_number: '',
+    email: '',
+    laptop_name: '',
+    laptop_image: '',
+    laptop_brand_id: 0,
+    laptop_cpu: '',
+    laptop_cpu_cores: 0,
+    laptop_cpu_threads: 0,
+    laptop_ram: 0,
+    laptop_hard_drive_type: '',
+    laptop_state: '',
+    laptop_price: 0 
+  })
+  const validationSchema = Yup.object({
+    name: Yup.string().min(2, 'მინიმუმ 2 სიმბოლო, ქართული ასოებით').required("გთხოვთ შეიყვანეთ სახელი").matches(/([aA-zZ])/, 'უნდა შეიცავდეს მხოლოდ ქართულ ასოებს'),
+    surname: Yup.string().min(2, 'მინიმუმ 2 სიმბოლო, ქართული ასოებით').required("გთხოვთ შეიყვანეთ გვარი").matches(/([aA-zZ])/, 'უნდა შეიცავდეს მხოლოდ ქართულ ასოებს'),
+    email: Yup.string().email().required(),
+    title: Yup.string().required(),
+    review: Yup.string().required(),
+    rating: Yup.number().min(1).max(10).required(),
+    date: Yup.date().default(() => new Date()),
+    wouldRecommend: Yup.boolean().default(false),
+  });
+
 
   return (
     <div className='bg-[#F7F7F7] py-8 h-full '>
-      <div className='flex'>
-        <h5 className={step==0 && 'font-bold'}>
+      <div className='flex md:mx-40 my-8 place-content-center'>
+        <h5 className={step==0 ? 'font-bold mx-4 underline underline-offset-8' : 'font-bold mx-4'}>
           თანამშრომლის ინფო
         </h5>
-        <h5 className={step==1 && 'font-bold'}>
+        <h5 className={step==1 ? 'font-bold mx-4 underline underline-offset-8' : 'font-bold mx-4'}>
           ლეპტოპის მახასიათებლები
         </h5>
       </div>
       <div className='rounded-lg bg-white md:mx-40 md:px-32 py-8'>
         <FormikStepper 
-          initialValues={{ 
-            name: '',
-            surname: '',
-            team_id: 0,
-            position_id: 0,
-            phone_number: '',
-            email: '',
-            laptop_name: '',
-            laptop_image: '',
-            laptop_brand_id: 0,
-            laptop_cpu: '',
-            laptop_cpu_cores: 0,
-            laptop_cpu_threads: 0,
-            laptop_ram: 0,
-            laptop_hard_drive_type: '',
-            laptop_state: '',
-            laptop_price: 0 }}
-          
+          initialValues={initialValues}
+          validationSchema={validationSchema}
           onSubmit={() => {}}
           step={{step, setStep}}
         >
@@ -63,11 +77,11 @@ export function FormikStepper ({ children, ...props }) {
         {
           step == 1 
           && 
-          <button type="button" className='text-blue-500 py-2 text-center rounded-md mt-8 float-left' onClick={()=> setStep(step-1)}>
+          <button type="button" className='text-blue-500 py-4 text-center rounded-md mt-8 float-left' onClick={()=> setStep(step-1)}>
             უკან
           </button>
         }
-        <button type="button" className='bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 w-1/4 text-center rounded-md mt-8' onClick={() => setStep(step+1)}>
+        <button type="button" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8' onClick={() => setStep(step+1)}>
           {
             step == 0 ? 'შემდეგი' : 'დამახსოვრება'
           }
