@@ -33,8 +33,8 @@ function ComputerDetails() {
             <FormInput name={'laptop_cpu_threads'} label={'CPU-ს ნაკადი'} placeholder={'365'} text={'მხოლოდ ციფრები'}/>
             </div>
             <div className='grid md:grid-cols-2 md:gap-6'>
-            <FormInput name={'laptop_ram'} label={'ლეპტოპის RAM (GB)'} placeholder={'გივი'} text={'მხოლოდ ციფრები'}/>
-            <FormToggle fieldName={'laptop_hard_drive_type'} label={'მეხსიერების ტიპი'} value1={'HDD'} value2={'SSD'}/>
+            <FormInput name={'laptop_ram'} label={'ლეპტოპის RAM (GB)'} placeholder={'0'} text={'მხოლოდ ციფრები'}/>
+            <FormToggle name={'laptop_hard_drive_type'} label={'მეხსიერების ტიპი'} values={['HDD', 'SSD']} names={['HDD', 'SSD']}/>
             </div>  
             <div className='grid md:grid-cols-2 md:gap-6 border-t border-gray-300 mt-8'>
             <FormInput name={'laptop_purchase_date'} label={'შეძენის რიცხვი (არჩევითი)'} placeholder={'დდ/თთ/წწწწ'} text={''}/>
@@ -42,7 +42,7 @@ function ComputerDetails() {
             </div> 
 
             <div>
-                <FormToggle fieldName={'laptop_state'} label={'ლეპტოპის მდგომარეობა'}  value1={'ახალი'} value2={'მეორადი'}/>
+                <FormToggle name={'laptop_state'} label={'ლეპტოპის მდგომარეობა'}  values={['new', 'old']} names={['ახალი', 'მეორადი']}/>
             </div> 
         </div>
   )

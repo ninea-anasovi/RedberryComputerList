@@ -1,37 +1,24 @@
 import React from 'react'
-import {Formik, Form, Field} from 'formik'
+import { useField } from 'formik'
 
-function FormToggle(props) {
-    const { fieldName, label, value1, value2 } =props
+function FormToggle({ label, values, names, ...props }) {
+    const [field, meta] = useField(props);
+    let inputStyles = meta.touched && meta.error ? 'text-red' : ''
+
   return (
-    <div>
-        
-        <Formik
-        initialValues={{
-            picked: '',
-        }}
-        onSubmit={async (values) => {
-            await new Promise((r) => setTimeout(r, 500));
-            alert(JSON.stringify(values, null, 2));
-        }}
-        >
-        {({ values }) => (
-            <>
-                <label htmlFor={fieldName} className="block mb-2 text-sm font-medium mt-8">{label}</label>
-                <div role="group" aria-labelledby="my-radio-group">
-                    <Field type="radio" name="picked" value={value1}/>
+            <div>
+                <label className={"block mb-2 text-sm font-medium mt-8" + inputStyles}>{label}</label>
+                <div  role="group" aria-labelledby="radio-group">
+                    <input {...props} {...meta} {...field} type="radio" name="picked" value={values[0]} className='w-4 h-4 border border-blue-600 text-blue-600'/>
                     <label className='text-sm font-medium ml-4 mr-8'>
-                    {value1}
+                    {names[0]}
                     </label>
-                    <Field type="radio" name="picked" value={value2} />
+                    <input {...props} {...meta} {...field} type="radio" name="picked" value={values[1]} className='w-4 h-4 border border-blue-600 text-blue-600'/>
                     <label className='ml-4 text-sm font-medium'>
-                    {value2}
+                        {names[1]}
                     </label>
                 </div>
-            </>
-        )}
-        </Formik>
-    </div>
+            </div>
   )
 }
 

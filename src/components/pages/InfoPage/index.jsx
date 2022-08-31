@@ -1,8 +1,10 @@
 import React from 'react'
+import FixedButton from '../../fixedButton'
 
 function InfoPage() {
   return (
     <div className='mx-48'>
+        <FixedButton goLink='/list'/>
         <h1 className='font-bold text-2xl text-center my-16'>ᲚᲔᲞᲢᲝᲞᲘᲡ ᲘᲜᲤᲝ</h1>
         <div className='grid md:grid-cols-2 items-center'>
             <img src='https://images.unsplash.com/photo-1587831990711-23ca6441447b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGVza3RvcCUyMGNvbXB1dGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80' className='w-4/5' alt='computer-pic' />

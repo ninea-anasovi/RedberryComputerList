@@ -6,6 +6,7 @@ import ComputerDetails from './ComputerDetails'
 import { useState } from 'react'
 import * as Yup from "yup";
 import { validationSchema } from '../../../validations'
+import FixedButton from '../../fixedButton'
 
 
 function WizardForm() {
@@ -33,12 +34,15 @@ function WizardForm() {
 
   return (
     <div className='bg-[#F7F7F7] py-8 h-full '>
+      <FixedButton goLink='/'/>
       <div className='flex md:mx-40 my-8 place-content-center'>
-        <h5 className={step==0 ? 'font-bold mx-4 underline underline-offset-8' : 'font-bold mx-4'} onClick={()=>setStep(0)}>
+        <h5 className='font-bold mx-4 place-content-center' onClick={()=>setStep(0)}>
           თანამშრომლის ინფო
+          {step==0 && <hr className='w-5/6 mx-4 text-black h-0.5 bg-black border-black mt-2' />}
         </h5>
-        <h5 className={step==1 ? 'font-bold mx-4 underline underline-offset-8' : 'font-bold mx-4'} onClick={()=>setStep(1)}>
+        <h5 className='font-bold mx-4' onClick={()=>setStep(1)}>
           ლეპტოპის მახასიათებლები
+          {step==1 && <hr className='w-5/6 mx-4 text-black h-0.5 bg-black border-black mt-2' />}
         </h5>
       </div>
       <div className='rounded-lg bg-white md:mx-40 md:px-32 py-8'>

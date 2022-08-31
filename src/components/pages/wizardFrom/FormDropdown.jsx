@@ -11,7 +11,7 @@ function FormDropdown({ label, options, ...props }) {
             <option value="" className='my-2'>{label}</option>
             {
               options.map((item) => (
-                <option value={item.id} className='py-2'>{item.name}</option>
+                <option value={item.id}  key={item.id} className='py-2'>{item.name}</option>
               ))
             }
         </select>
