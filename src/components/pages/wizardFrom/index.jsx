@@ -17,6 +17,7 @@ function WizardForm() {
     team_id: 0,
     position_id: 0,
     phone_number: '',
+    image: '',
     email: '',
     laptop_name: '',
     laptop_image: '',
