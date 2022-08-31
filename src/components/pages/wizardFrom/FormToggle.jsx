@@ -23,7 +23,6 @@ function FormToggle(props) {
                     <label className='text-sm font-medium ml-4 mr-8'>
                     {value1}
                     </label>
-                    
                     <Field type="radio" name="picked" value={value2} />
                     <label className='ml-4 text-sm font-medium'>
                     {value2}

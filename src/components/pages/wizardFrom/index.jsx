@@ -5,6 +5,7 @@ import EmployeeDetails from './EmployeeDetails'
 import ComputerDetails from './ComputerDetails'
 import { useState } from 'react'
 import * as Yup from "yup";
+import { validationSchema } from '../../../validations'
 
 
 function WizardForm() {
@@ -27,25 +28,16 @@ function WizardForm() {
     laptop_state: '',
     laptop_price: 0 
   })
-  const validationSchema = Yup.object({
-    name: Yup.string().min(2, 'მინიმუმ 2 სიმბოლო, ქართული ასოებით').required("გთხოვთ შეიყვანეთ სახელი").matches(/([aA-zZ])/, 'უნდა შეიცავდეს მხოლოდ ქართულ ასოებს'),
-    surname: Yup.string().min(2, 'მინიმუმ 2 სიმბოლო, ქართული ასოებით').required("გთხოვთ შეიყვანეთ გვარი").matches(/([aA-zZ])/, 'უნდა შეიცავდეს მხოლოდ ქართულ ასოებს'),
-    email: Yup.string().email().required(),
-    title: Yup.string().required(),
-    review: Yup.string().required(),
-    rating: Yup.number().min(1).max(10).required(),
-    date: Yup.date().default(() => new Date()),
-    wouldRecommend: Yup.boolean().default(false),
-  });
+  
 
 
   return (
     <div className='bg-[#F7F7F7] py-8 h-full '>
       <div className='flex md:mx-40 my-8 place-content-center'>
-        <h5 className={step==0 ? 'font-bold mx-4 underline underline-offset-8' : 'font-bold mx-4'}>
+        <h5 className={step==0 ? 'font-bold mx-4 underline underline-offset-8' : 'font-bold mx-4'} onClick={()=>setStep(0)}>
           თანამშრომლის ინფო
         </h5>
-        <h5 className={step==1 ? 'font-bold mx-4 underline underline-offset-8' : 'font-bold mx-4'}>
+        <h5 className={step==1 ? 'font-bold mx-4 underline underline-offset-8' : 'font-bold mx-4'} onClick={()=>setStep(1)}>
           ლეპტოპის მახასიათებლები
         </h5>
       </div>
