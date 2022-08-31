@@ -1,5 +1,5 @@
 import React from 'react'
-import {useField} from 'formik'
+import { useField } from 'formik'
 
 
 function FormInput({label, text, ...props}) {
@@ -12,7 +12,7 @@ function FormInput({label, text, ...props}) {
     <div>
         <>
           <label className="block mb-2 text-sm font-medium mt-8">{label}</label>
-          <input {...props} {...field} {...meta}  className={inputStyles} />
+          <input {...props} {...field} {...meta} className={inputStyles} />
           <p className={messageStyle}>{message}</p>
         </>
     </div>

@@ -11,13 +11,13 @@ import FixedButton from '../../fixedButton'
 
 function WizardForm() {
   const [step, setStep] = useState(0)
-  const initialValues = Yup.object({
+  const initialvalues = Yup.object({
     name: '',
     surname: '',
     team_id: 0,
     position_id: 0,
     phone_number: '',
-    image: '',
+    // image: '',
     email: '',
     laptop_name: '',
     laptop_image: '',
@@ -48,8 +48,8 @@ function WizardForm() {
       </div>
       <div className='rounded-lg bg-white md:mx-40 md:px-32 py-8'>
         <FormikStepper 
-          initialValues={initialValues}
-          validationSchema={validationSchema}
+          initialValues = {initialvalues}
+          validationSchema = {validationSchema}
           onSubmit={() => {}}
           step={{step, setStep}}
         >
