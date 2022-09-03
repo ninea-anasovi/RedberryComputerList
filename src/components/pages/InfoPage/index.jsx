@@ -18,7 +18,7 @@ function InfoPage() {
                 <p className='text-md font-bold'>მეილი:</p>
                 <p>ako@redberry.com</p>
                 <p className='text-md font-bold'>ტელ. ნომერი:</p>
-                <p>+995 599 99 99 99</p>
+                <p>+995 599 00 00 00</p>
             </div>
         </div>
         <div className='grid md:grid-cols-2 items-start my-6 md:my-16 border-t border-gray-300 pt-6 md:pt-16'>
