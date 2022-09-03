@@ -7,11 +7,11 @@ function FormDropdown({ label, options, ...props }) {
 
   return (
     <div>
-        <select {...props} {...field} {...meta} className={"dropdowns bg-[#F7F7F7] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-9 focus:outline-0 focus:border-[#F7F7F7] " + dropdownStyle}>
+        <select {...props} {...field} {...meta} className={"bg-[#F7F7F7] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-9 focus:outline-0 focus:border-[#F7F7F7] " + dropdownStyle}>
             <option value="" className='my-2'>{label}</option>
             {
               options.map((item) => (
-                <option value={item.id} className='py-2'>{item.name}</option>
+                <option value={item.id} className='py-2' key={item.id}>{item.name}</option>
               ))
             }
         </select>

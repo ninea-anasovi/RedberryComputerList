@@ -14,7 +14,7 @@ function List() {
     <div className=''>
       <FixedButton goLink='/'/>
       <h1 className='font-bold text-2xl text-center my-16'>ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ</h1>
-      <div className='md:grid md:grid-cols-2 md:gap-6 lg:mx-48 md:mx-8 sm:mx-4'>
+      <div className='grid md:grid-cols-2 gap-6 mx-4 lg:mx-48 md:mx-8 '>
           <Card/>
           <Card/>
           <Card/>

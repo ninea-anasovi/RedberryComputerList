@@ -1,5 +1,5 @@
 import React, { Children } from 'react'
-import {Formik, Form, Field, FormikConfig, FormikValues} from 'formik'
+import {Formik, Form } from 'formik'
 import icon from '../../../assets/images/icon.svg'
 import EmployeeDetails from './EmployeeDetails'
 import ComputerDetails from './ComputerDetails'
@@ -7,6 +7,7 @@ import { useState } from 'react'
 import * as Yup from "yup";
 import { validationSchema } from '../../../validations'
 import FixedButton from '../../fixedButton'
+import axios from 'axios'
 
 
 function WizardForm() {
@@ -17,7 +18,7 @@ function WizardForm() {
     team_id: 0,
     position_id: 0,
     phone_number: '',
-    // image: '',
+    image: '',
     email: '',
     laptop_name: '',
     laptop_image: '',
@@ -30,8 +31,27 @@ function WizardForm() {
     laptop_state: '',
     laptop_price: 0 
   })
-  
 
+  const [serverState, setServerState] = useState();
+  
+  const handleServerResponse = (ok, Msg) => {
+    setServerState({ok, Msg});
+  };
+
+  const handleOnSubmit = (values, actions) => {
+    axios.post('/laptop/create', values)
+      .then(response => {
+        actions.setSubmitting(false);
+        actions.resetForm();
+        console.log(response);
+        handleServerResponse(true, "Thanks!");
+      })
+      .catch(error => {
+        console.log(error);
+        actions.setSubmitting(false);
+        handleServerResponse(false, Error.response.data.error);
+      });
+  };
 
   return (
     <div className='bg-[#F7F7F7] py-8 h-full '>
@@ -39,18 +59,18 @@ function WizardForm() {
       <div className='flex md:mx-40 my-8 place-content-center'>
         <h5 className='font-bold mx-4 place-content-center' onClick={()=>setStep(0)}>
           თანამშრომლის ინფო
-          {step==0 && <hr className='w-5/6 mx-4 text-black h-0.5 bg-black border-black mt-2' />}
+          {step === 0 && <hr className='w-5/6 mx-4 text-black h-0.5 bg-black border-black mt-2' />}
         </h5>
         <h5 className='font-bold mx-4' onClick={()=>setStep(1)}>
           ლეპტოპის მახასიათებლები
-          {step==1 && <hr className='w-5/6 mx-4 text-black h-0.5 bg-black border-black mt-2' />}
+          {step === 1 && <hr className='w-5/6 mx-4 text-black h-0.5 bg-black border-black mt-2' />}
         </h5>
       </div>
-      <div className='rounded-lg bg-white md:mx-40 md:px-32 py-8'>
+      <div className='rounded-lg bg-white md:mx-40  px-4 md:px-32 py-8'>
         <FormikStepper 
           initialValues = {initialvalues}
           validationSchema = {validationSchema}
-          onSubmit={() => {}}
+          OnSubmit={handleOnSubmit}
           step={{step, setStep}}
         >
           <EmployeeDetails/>
@@ -62,27 +82,38 @@ function WizardForm() {
   )
 }
 
+
+
 export function FormikStepper ({ children, ...props }) {
   const {step, setStep} = props.step
   const choldrenArray = Children.toArray(children);
   const currentChild = choldrenArray[step];
+
+
 
   return <Formik {...props}>
     <Form autoComplete='off'>
       {currentChild}
       <div className='text-right'>
         {
-          step == 1 
-          && 
-          <button type="button" className='text-blue-500 py-4 text-center rounded-md mt-8 float-left' onClick={()=> setStep(step-1)}>
-            უკან
+        step === 0 
+        && 
+          <button type="button" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8' onClick={() => setStep(step+1)}>
+            შემდეგი
           </button>
         }
-        <button type="button" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8' onClick={() => setStep(step+1)}>
-          {
-            step == 0 ? 'შემდეგი' : 'დამახსოვრება'
-          }
-        </button>
+        {
+          step === 1 
+          &&
+          <>
+            <button type="button" className='text-blue-500 py-4 text-center rounded-md mt-8 float-left' onClick={()=> setStep(step-1)}>
+              უკან
+            </button>
+            <button type="submit" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8'>
+              დამახსოვრება
+            </button>
+          </> 
+        }
       </div>
     </Form> 
   </Formik>

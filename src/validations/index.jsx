@@ -16,6 +16,6 @@ export const validationSchema = Yup.object().shape({
     laptop_ram:  Yup.number().required("გთხოვთ მიუთითოთ ოპერატიული მეხსიერება"),
     laptop_hard_drive_type: Yup.string().required("გთხოვთ მიუთითოთ მეხსიერების ტიპი"),
     laptop_state: Yup.string().required("გთხოვთ მიუთითოთ მდგომარეობა"),
-    laptop_purchase_date: Yup.string(),
+    laptop_purchase_date: Yup.date('გთხოვთ შეიყვანოთ თარიღი'),
     laptop_price: Yup.number().min(1, 'ფასი ვერ იქნება 0 ₾').required("გთხოვთ მიუთითოთ ფასი")
   });
