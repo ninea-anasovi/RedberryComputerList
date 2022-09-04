@@ -5,7 +5,7 @@ export const formValidation = Yup.object().shape({
   surname: Yup.string().min(2, 'მინიმუმ 2 სიმბოლო, ქართული ასოებით').required("გთხოვთ შეიყვანეთ გვარი").matches( (/^[ა-ჰ]+$/), 'უნდა შეიცავდეს მხოლოდ ქართულ ასოებს'),
   team_id: Yup.number().required("გთხოვთ აირჩიოთ თიმი"),
   position_id: Yup.number().required("გთხოვთ აირჩიოთ პოზიცია"),
-  phone_number: Yup.string().matches((/\+995\d\d\d\d\d\d\d\d\d$/), 'გთხოვთ შეიყვანოთ ნომერი ქართული კოდით +995 XX XX XX').min(13, 'ტელეფონის ნომერი არ არსებობს').max(13, 'ტელეფონის ნომერი არ არსებობს').required("გთხოვთ შეიყვანოთ ტელ. ნომერი"),
+  phone_number: Yup.string().matches(/^\+995\d{9}$/, 'გთხოვთ შეიყვანოთ ნომერი ქართული კოდით +995 XX XX XX').min(13, 'ტელეფონის ნომერი არ არსებობს').max(13, 'ტელეფონის ნომერი არ არსებობს').required("გთხოვთ შეიყვანოთ ტელ. ნომერი"),
   email: Yup.string().email('გთხოვთ შეიყვანოთ ნამდვილი იმეილი').matches(/@redberry.ge/, 'გთხოვთ შეიყვანოთ სამუშაო იმეილი example@redberry.ge').required('უნდა მთავრდებოდეს @redberry.ge-ით'),
   laptop_name: Yup.string().required("გთხოვთ შეიყვანეთ ლეპტოპის სახელი"),
   // laptop_image: Yup.string().required(),
