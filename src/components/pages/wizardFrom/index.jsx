@@ -19,10 +19,9 @@ function WizardForm() {
     team_id: 0,
     position_id: 0,
     phone_number: '',
-    image: '',
+    laptop_image: null,
     email: '',
     laptop_name: '',
-    laptop_image: '',
     laptop_brand_id: 0,
     laptop_cpu: '',
     laptop_cpu_cores: 0,
@@ -32,6 +31,8 @@ function WizardForm() {
     laptop_state: '',
     laptop_price: 0 
   })
+
+  const [ selectedFile, setSelectedFile ] = useState()
 
   return (
     <div className='bg-[#F7F7F7] py-8 h-full '>
@@ -51,19 +52,33 @@ function WizardForm() {
           initialValues = {initialvalues}
           validationSchema = {formValidation}
           onSubmit={(values, actions) => {
-            console.log('aqvar')
-            // console.log(values);
-            // console.log(actions);
-            
-            axios.post('/laptop/create', values)
+            const body = new FormData();
+            body.append('laptop_image', selectedFile)
+            body.append('name', values.name)
+            body.append('surname', values.surname)
+            body.append('team_id', values.team_id)
+            body.append('position_id', values.position_id)
+            body.append('phone_number', values.phone_number)
+            body.append('email', values.email)
+            body.append('laptop_name', values.laptop_name)
+            body.append('laptop_brand_id', values.laptop_brand_id)
+            body.append('laptop_cpu', values.laptop_cpu)
+            body.append('laptop_cpu_cores', values.laptop_cpu_cores)
+            body.append('laptop_cpu_threads', values.laptop_cpu_threads)
+            body.append('laptop_ram', values.laptop_ram)
+            body.append('laptop_hard_drive_type', values.laptop_hard_drive_type)
+            body.append('laptop_state', values.laptop_state)
+            body.append('laptop_price', values.laptop_price)
+            axios.post('/laptop/create', body)
               .then(response => console.log(response))
               .catch(error => console.log(error))
             actions.setSubmitting(false);
+            actions.resetForm()
           }}
           step={{step, setStep}}
         >
           <EmployeeDetails/>
-          <ComputerDetails/>
+          <ComputerDetails setSelectedFile={setSelectedFile}/>
         </FormikStepper>
       </div>
       <img src={icon} alt='Redberry Icon' className='ml-auto mr-auto mt-8 w-16'/>

@@ -28,7 +28,7 @@ function EmployeeDetails() {
             <FormDropdown name={'team_id'} options={teams} label='თიმი' />
             <FormDropdown name={'position_id'} options={positions} label='პოზიცია'/>
             <FormInput name={'email'} type={'email'} label={'მეილი'} placeholder={'მეილი'} text={'უნდა მთავრდებოდეს @redberry.ge-ით'}/>
-            <FormInput  name={'phone_number'} type={'number'} label={'ტელეფონის ნომერი'} placeholder={'+995'} text={'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს'}/>
+            <FormInput  name={'phone_number'} type={'text'} label={'ტელეფონის ნომერი'} placeholder={'+995'} text={'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს'}/>
         </div>
   )
 }

@@ -3,7 +3,7 @@ import { useField } from 'formik'
 
 function FormDropdown(props) {
   const [field, meta] = useField(props);
-  const { label, options, name } = props;
+  const { label, options, name, useNameAsValue = false } = props;
   let dropdownStyle = meta.touched && meta.error ? 'border-2 border-red-500' : 'border-2 border-[#F7F7F7]';
 
   return (
@@ -12,7 +12,7 @@ function FormDropdown(props) {
             <option value="" className='my-2'>{label}</option>
             {
               options.map((item) => (
-                <option value={item.id} className='py-2' key={item.id}>{item.name}</option>
+                <option value={useNameAsValue ? item.name : item.id} className='py-2' key={item.id}>{item.name}</option>
               ))
             }
         </select>

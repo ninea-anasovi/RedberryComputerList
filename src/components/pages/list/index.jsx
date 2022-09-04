@@ -3,11 +3,19 @@ import { useEffect } from 'react'
 import Card from './card'
 import axios from 'axios'
 import FixedButton from '../../fixedButton'
+import { useState } from 'react'
 
 
 function List() {
+
+  const [ data, setData ] = useState([])
+
   useEffect(() => {
-    // axios.get('/laptops').then(response => console.log(response.data))
+    axios.get('/laptops').then(response => {
+      console.log(response.data)
+      setData(response.data)
+      console.log(data)
+    })
   },[])
 
   return (

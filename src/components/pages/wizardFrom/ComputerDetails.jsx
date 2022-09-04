@@ -7,9 +7,9 @@ import FormInput from './FormInput'
 import FormToggle from './FormToggle'
 import FormUpload from './FormUpload'
 
-function ComputerDetails() {
+function ComputerDetails({setSelectedFile}) {
     const [ laptopBrandId, setLaptopBrandID ] = useState([])
-    const [laptopCPU, setLaptopCPU] = useState([])
+    const [ laptopCPU, setLaptopCPU ] = useState([])
     useEffect(()=>{
         axios.get('/brands').then(response => {
             setLaptopBrandID(response.data.data)
@@ -22,13 +22,13 @@ function ComputerDetails() {
 
     return (
         <div>
-            <FormUpload/>
+            <FormUpload setSelectedFile={setSelectedFile} />
             <div className='grid md:grid-cols-2 md:gap-6 items-center'>
             <FormInput name={'laptop_name'} type={'text'} label={'ლეპტოპის სახელი'} placeholder={'HP'} text={'ლათინური ასოები, ციფრები, !@#$%^&*()_+= '}/>
             <FormDropdown name={'laptop_brand_id'} label={'ლეპტოპის ბრენდი'} options={laptopBrandId}/>
             </div>  
             <div className='grid md:grid-cols-3 md:gap-6 items-center border-t border-gray-300 mt-8'>
-            <FormDropdown name={'laptop_cpu'} label={'CPU'} options={laptopCPU}/>
+            <FormDropdown name={'laptop_cpu'} label={'CPU'} options={laptopCPU} useNameAsValue={true}/>
             <FormInput name={'laptop_cpu_cores'} label={'CPU-ს ბირთვი'} placeholder={'14'} text={'მხოლოდ ციფრები'}/>
             <FormInput name={'laptop_cpu_threads'} label={'CPU-ს ნაკადი'} placeholder={'365'} text={'მხოლოდ ციფრები'}/>
             </div>
