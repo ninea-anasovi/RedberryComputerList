@@ -2,7 +2,8 @@ import React from 'react'
 import { useField } from 'formik'
 
 
-function FormInput({label, text, ...props}) {
+function FormInput(props) {
+  const {label, text, name, type, placeholder} = props;
   const [field, meta] = useField(props);
   let inputStyles = meta.touched && meta.error ? "border-2 border-red-500 text-gray-900 text-sm rounded-lg block w-full p-2.5 mt-2 focus:outline-0" : " border-2 border-blue-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 mt-2 focus:outline-0";
   let message = meta.touched && meta.error ? meta.error : text;
@@ -12,7 +13,7 @@ function FormInput({label, text, ...props}) {
     <div>
         <>
           <label className="block mb-2 text-sm font-medium mt-8">{label}</label>
-          <input {...props} {...field} className={inputStyles} />
+          <input {...field} name={name} type={type} placeholder={placeholder} className={inputStyles} />
           <p className={messageStyle}>{message}</p>
         </>
     </div>

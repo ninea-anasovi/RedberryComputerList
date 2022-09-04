@@ -22,13 +22,13 @@ function EmployeeDetails() {
     return (
         <div>
             <div className='grid md:grid-cols-2 md:gap-6'>
-                <FormInput name={'name'} label={'სახელი'} placeholder={'გივი'} text={'მინიმუმ 2 სიმბოლო, ქართული ასოებით'}/>
-                <FormInput name={'surname'} label={'გვარი'} placeholder={'ბაგრატიონი'}  text={'მინიმუმ 2 სიმბოლო, ქართული ასოებით'}/>
+                <FormInput name={'name'} type={'text'}label={'სახელი'} placeholder={'გივი'} text={'მინიმუმ 2 სიმბოლო, ქართული ასოებით'}/>
+                <FormInput name={'surname'} type={'text'} label={'გვარი'} placeholder={'ბაგრატიონი'}  text={'მინიმუმ 2 სიმბოლო, ქართული ასოებით'}/>
             </div>                
             <FormDropdown name={'team_id'} options={teams} label='თიმი' />
             <FormDropdown name={'position_id'} options={positions} label='პოზიცია'/>
-            <FormInput name={'email'} label={'მეილი'} placeholder={'მეილი'} text={'უნდა მთავრდებოდეს @redberry.ge-ით'}/>
-            <FormInput  name={'phone_number'} label={'ტელეფონის ნომერი'} placeholder={'+995'} text={'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს'}/>
+            <FormInput name={'email'} type={'email'} label={'მეილი'} placeholder={'მეილი'} text={'უნდა მთავრდებოდეს @redberry.ge-ით'}/>
+            <FormInput  name={'phone_number'} type={'number'} label={'ტელეფონის ნომერი'} placeholder={'+995'} text={'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს'}/>
         </div>
   )
 }

@@ -5,9 +5,10 @@ import EmployeeDetails from './EmployeeDetails'
 import ComputerDetails from './ComputerDetails'
 import { useState } from 'react'
 import * as Yup from "yup";
-import { validationSchema } from '../../../validations'
+import { formValidation } from '../../../validations'
 import FixedButton from '../../fixedButton'
 import axios from 'axios'
+import { useEffect } from 'react'
 
 
 function WizardForm() {
@@ -32,27 +33,6 @@ function WizardForm() {
     laptop_price: 0 
   })
 
-  const [serverState, setServerState] = useState();
-  
-  const handleServerResponse = (ok, Msg) => {
-    setServerState({ok, Msg});
-  };
-
-  const handleOnSubmit = (values, actions) => {
-    axios.post('/laptop/create', values)
-      .then(response => {
-        actions.setSubmitting(false);
-        actions.resetForm();
-        console.log(response);
-        handleServerResponse(true, "Thanks!");
-      })
-      .catch(error => {
-        console.log(error);
-        actions.setSubmitting(false);
-        handleServerResponse(false, Error.response.data.error);
-      });
-  };
-
   return (
     <div className='bg-[#F7F7F7] py-8 h-full '>
       <FixedButton goLink='/'/>
@@ -69,8 +49,17 @@ function WizardForm() {
       <div className='rounded-lg bg-white md:mx-40  px-4 md:px-32 py-8'>
         <FormikStepper 
           initialValues = {initialvalues}
-          validationSchema = {validationSchema}
-          OnSubmit={handleOnSubmit}
+          validationSchema = {formValidation}
+          onSubmit={(values, actions) => {
+            console.log('aqvar')
+            // console.log(values);
+            // console.log(actions);
+            
+            axios.post('/laptop/create', values)
+              .then(response => console.log(response))
+              .catch(error => console.log(error))
+            actions.setSubmitting(false);
+          }}
           step={{step, setStep}}
         >
           <EmployeeDetails/>
@@ -86,37 +75,37 @@ function WizardForm() {
 
 export function FormikStepper ({ children, ...props }) {
   const {step, setStep} = props.step
-  const choldrenArray = Children.toArray(children);
-  const currentChild = choldrenArray[step];
+  const childrenArray = Children.toArray(children);
+  const currentChild = childrenArray[step];
 
-
-
-  return <Formik {...props}>
-    <Form autoComplete='off'>
-      {currentChild}
-      <div className='text-right'>
-        {
-        step === 0 
-        && 
-          <button type="button" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8' onClick={() => setStep(step+1)}>
-            შემდეგი
-          </button>
-        }
-        {
-          step === 1 
-          &&
-          <>
-            <button type="button" className='text-blue-500 py-4 text-center rounded-md mt-8 float-left' onClick={()=> setStep(step-1)}>
-              უკან
+  return (
+    <Formik {...props}>
+      <Form autoComplete='off'>
+        {currentChild}
+        <div className='text-right'>
+          {
+          step === 0 
+          && 
+            <button type="button" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8' onClick={() => setStep(step+1)}>
+              შემდეგი
             </button>
-            <button type="submit" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8'>
-              დამახსოვრება
-            </button>
-          </> 
-        }
-      </div>
-    </Form> 
-  </Formik>
+          }
+          {
+            step === 1 
+            &&
+            <>
+              <button type="button" className='text-blue-500 py-4 text-center rounded-md mt-8 float-left' onClick={()=> setStep(step-1)}>
+                უკან
+              </button>
+              <button type="submit" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8'>
+                დამახსოვრება
+              </button>
+            </> 
+          }
+        </div>
+      </Form> 
+    </Formik>
+  )
 }
 
 export default WizardForm

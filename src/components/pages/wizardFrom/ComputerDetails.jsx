@@ -24,7 +24,7 @@ function ComputerDetails() {
         <div>
             <FormUpload/>
             <div className='grid md:grid-cols-2 md:gap-6 items-center'>
-            <FormInput name={'laptop_name'} label={'ლეპტოპის სახელი'} placeholder={'HP'} text={'ლათინური ასოები, ციფრები, !@#$%^&*()_+= '}/>
+            <FormInput name={'laptop_name'} type={'text'} label={'ლეპტოპის სახელი'} placeholder={'HP'} text={'ლათინური ასოები, ციფრები, !@#$%^&*()_+= '}/>
             <FormDropdown name={'laptop_brand_id'} label={'ლეპტოპის ბრენდი'} options={laptopBrandId}/>
             </div>  
             <div className='grid md:grid-cols-3 md:gap-6 items-center border-t border-gray-300 mt-8'>
@@ -42,7 +42,7 @@ function ComputerDetails() {
             </div> 
 
             <div>
-                <FormToggle name={'laptop_state'} label={'ლეპტოპის მდგომარეობა'}  values={['new', 'old']} names={['ახალი', 'მეორადი']}/>
+                <FormToggle name={'laptop_state'} label={'ლეპტოპის მდგომარეობა'}  values={['new', 'used']} names={['ახალი', 'მეორადი']}/>
             </div> 
         </div>
   )
