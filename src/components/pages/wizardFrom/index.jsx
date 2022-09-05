@@ -37,10 +37,7 @@ function WizardForm() {
     body.append('laptop_price', values.laptop_price)
     axios.post('/laptop/create', body)
       .then(response => navigate('/finished'))
-      .catch(error => console.log(error))
-    // actions.setSubmitting(false);
-    // actions.resetForm()
-    
+      .catch(error => console.log(error))    
   }
 
   const initialvalues = Yup.object({
