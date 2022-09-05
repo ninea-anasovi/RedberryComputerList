@@ -15,7 +15,7 @@ function App() {
         <Route path='/' element={<Home />}/>
         <Route path='/form' element={<WizardForm />}/>
         <Route path='/list' element={<List />}/>
-        <Route path='/details' element={<InfoPage />}/>
+        <Route path='/laptop/:id' element={<InfoPage />}/>
         <Route path='/finished' element={<Finished />}/>
       </Routes>
     </div>

@@ -1,13 +1,22 @@
 import React from 'react'
+import { Link } from "react-router-dom"
+import { useEffect } from 'react'
 
-function Card() {
+function Card({laptopData}) {
+
   return (
         <div className="flex items-center bg-blue-50 rounded-[15px] border border-blue-100 flex-row">
-        <img className="object-cover h-auto w-1/2 rounded-[10px] mx-2 my-2" src="https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGVuc3xlbnwwfHwwfHw%3D&w=1000&q=80" alt=""/>
+        <img 
+          className="object-cover h-auto w-1/2 rounded-[10px] mx-2 my-2" 
+          src={`${process.env.REACT_APP_REDBERRY_IMAGE_BASE_URL}${laptopData.laptop.image}`} 
+          alt="laptop_image"
+        />
         <div className="flex flex-col justify-between p-4 leading-normal">
-            <h5 className="mb-2 text-md font-semibold tracking-tight text-gray-900">ნატო ანდღულაძე</h5>
-            <p className="mb-3 text-md font-normal text-black ">pentium IV</p>
-            <a href='#' className='text-sm text-blue-600 underline underline-offset-2'>მეტის ნახვა</a>
+            <h5 className="mb-2 text-md font-semibold tracking-tight text-gray-900">{laptopData?.user.name} {laptopData?.user.surname}</h5>
+            <p className="mb-3 text-md font-normal text-black ">{laptopData.laptop.name}</p>
+            <Link to={'/laptop/' + `${laptopData.laptop.id}`}>
+              <div className='text-sm text-blue-600 underline underline-offset-2'>მეტის ნახვა</div>
+            </Link>
         </div>
         </div>
   )

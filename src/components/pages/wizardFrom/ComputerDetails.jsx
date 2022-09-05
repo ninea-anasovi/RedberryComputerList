@@ -18,7 +18,7 @@ function ComputerDetails({setSelectedFile}) {
         axios.get('/cpus').then(response => {
             setLaptopCPU(response.data.data)
         }).catch(error => console.log(error))
-    }, [] )
+    }, [])
 
     return (
         <div>

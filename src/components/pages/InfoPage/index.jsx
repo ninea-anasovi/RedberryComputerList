@@ -1,30 +1,53 @@
+import axios from 'axios';
 import React from 'react'
-import FixedButton from '../../fixedButton'
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import FixedButton from '../../fixedButton';
 
 function InfoPage() {
+
+    let { id } = useParams();
+    const [ user, setUser ] = useState()
+    const [ laptop, setLaptop ] = useState()
+
+    useEffect(() => {
+        axios.get(`/laptop/${id}`)
+            .then(response => {
+                setUser(response.data.data.user);
+                setLaptop(response.data.data.laptop)
+                console.log(response.data.data.user)
+            })
+            .catch(error => console.log(error))
+    }, [])
+
   return (
     <div className='mx-4 md:mx-48'>
         <FixedButton goLink='/list'/>
         <h1 className='font-bold text-2xl text-center my-6 md:my-16'>ᲚᲔᲞᲢᲝᲞᲘᲡ ᲘᲜᲤᲝ</h1>
         <div className='grid md:grid-cols-2 items-center'>
-            <img src='https://images.unsplash.com/photo-1587831990711-23ca6441447b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGVza3RvcCUyMGNvbXB1dGVyfGVufDB8fDB8fA%3D%3D&w=1000&q=80' className='md:w-4/5' alt='computer-pic' />
+            <img 
+                src={`${process.env.REACT_APP_REDBERRY_IMAGE_BASE_URL}${laptop?.image}`} 
+                className='md:w-4/5' 
+                alt='computer-pic' 
+            />
             <div className='grid grid-cols-2 gap-1 md:gap-4 mt-6 md:mt-0'>
                 <p className='text-md font-bold'>სახელი:</p>
-                <p>ნატო ჯღარკავა</p>
+                <p>{user?.name} {user?.surname}</p>
                 <p className='text-md font-bold'>თიმი:</p>
                 <p>დიზაინერები</p>
                 <p className='text-md font-bold'>პოზიცია:</p>
-                <p >ილუსტრატორი</p>
+                <p>ილუსტრატორი</p>
                 <p className='text-md font-bold'>მეილი:</p>
-                <p>ako@redberry.com</p>
+                <p>{user?.email}</p>
                 <p className='text-md font-bold'>ტელ. ნომერი:</p>
-                <p>+995 599 00 00 00</p>
+                <p>{user?.phone_number}</p>
             </div>
         </div>
         <div className='grid md:grid-cols-2 items-start my-6 md:my-16 border-t border-gray-300 pt-6 md:pt-16'>
             <div className='grid grid-cols-2 gap-1 md:gap-4'>
                 <p className='text-md font-bold'>ლეპტოპის სახელი:</p>
-                <p>დიზაინერები</p>
+                <p>{laptop?.name}</p>
                 <p className='text-md font-bold'>ლეპტოპის ბრენდი:</p>
                 <p >ილუსტრატორი</p>
                 <p className='text-md font-bold'>RAM:</p>
