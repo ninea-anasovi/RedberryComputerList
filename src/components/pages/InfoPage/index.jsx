@@ -19,7 +19,6 @@ function InfoPage() {
             .then(response => {
                 setUser(response.data.data.user);
                 setLaptop(response.data.data.laptop)
-                console.log(response.data.data.laptop)
             })
             .catch(error => console.log(error))
         axios.get('/teams')
