@@ -10,7 +10,7 @@ function FormDropdown(props) {
     <div>
         <select name={name} {...field} 
           className={"bg-[#F7F7F7] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mt-9 focus:outline-0 focus:border-[#F7F7F7] " + dropdownStyle}
-          handleChange={(event: FormEvent) => {name === 'team_id' &&  setTeamID(event.target.value)}} 
+          handleChange={(event) => {name === 'team_id' &&  setTeamID(event.target.value)}} 
         >
             <option value="" className='my-2'>{label}</option>
             {
