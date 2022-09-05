@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 function Card({laptopData}) {
 
   return (
-        <div className="flex items-center bg-blue-50 rounded-[15px] border border-blue-100 flex-row mb-20">
+        <div className="flex items-center bg-blue-50 rounded-[15px] border border-blue-100 flex-row">
         <img 
           className="object-cover h-32 w-1/2 md:h-48 rounded-[10px] mx-2 my-2" 
           src={`${process.env.REACT_APP_REDBERRY_IMAGE_BASE_URL}${laptopData.laptop.image}`} 
