@@ -7,13 +7,41 @@ import * as Yup from "yup";
 import { formValidation } from '../../../validations'
 import FixedButton from '../../fixedButton'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { useEffect } from 'react'
 
 
 function WizardForm() {
-  const [ step, setStep ] = useState(0)
-  const [ selectedFile, setSelectedFile ] = useState()
+  const [ step, setStep ] = useState(0);
+  const [ selectedFile, setSelectedFile ] = useState();
+  let navigate = useNavigate();
+
+  const handleFormSubmit = (values, actions) => {
+    const body = new FormData();
+    body.append('laptop_image', selectedFile)
+    body.append('name', values.name)
+    body.append('surname', values.surname)
+    body.append('team_id', values.team_id)
+    body.append('position_id', values.position_id)
+    body.append('phone_number', values.phone_number)
+    body.append('email', values.email)
+    body.append('laptop_name', values.laptop_name)
+    body.append('laptop_brand_id', values.laptop_brand_id)
+    body.append('laptop_cpu', values.laptop_cpu)
+    body.append('laptop_cpu_cores', values.laptop_cpu_cores)
+    body.append('laptop_cpu_threads', values.laptop_cpu_threads)
+    body.append('laptop_ram', values.laptop_ram)
+    body.append('laptop_hard_drive_type', values.laptop_hard_drive_type)
+    body.append('laptop_state', values.laptop_state)
+    body.append('laptop_price', values.laptop_price)
+    axios.post('/laptop/create', body)
+      .then(response => navigate('/finished'))
+      .catch(error => console.log(error))
+    // actions.setSubmitting(false);
+    // actions.resetForm()
+    
+  }
 
   const initialvalues = Yup.object({
     name: '',
@@ -54,28 +82,7 @@ function WizardForm() {
           initialValues = {initialvalues}
           validationSchema = {formValidation}
           onSubmit={(values, actions) => {
-            const body = new FormData();
-            body.append('laptop_image', selectedFile)
-            body.append('name', values.name)
-            body.append('surname', values.surname)
-            body.append('team_id', values.team_id)
-            body.append('position_id', values.position_id)
-            body.append('phone_number', values.phone_number)
-            body.append('email', values.email)
-            body.append('laptop_name', values.laptop_name)
-            body.append('laptop_brand_id', values.laptop_brand_id)
-            body.append('laptop_cpu', values.laptop_cpu)
-            body.append('laptop_cpu_cores', values.laptop_cpu_cores)
-            body.append('laptop_cpu_threads', values.laptop_cpu_threads)
-            body.append('laptop_ram', values.laptop_ram)
-            body.append('laptop_hard_drive_type', values.laptop_hard_drive_type)
-            body.append('laptop_state', values.laptop_state)
-            body.append('laptop_price', values.laptop_price)
-            axios.post('/laptop/create', body)
-              .then(response => console.log(response))
-              .catch(error => console.log(error))
-            // actions.setSubmitting(false);
-            // actions.resetForm()
+            handleFormSubmit(values, actions);
           }}
           step={{step, setStep}}
         >

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useField, FormEvent } from 'formik';
+import { useField } from 'formik';
 
 function FormDropdown(props) {
   const [ field, meta ] = useField(props);
