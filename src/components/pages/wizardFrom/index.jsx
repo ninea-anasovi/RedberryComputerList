@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import { formValidation } from '../../../validations'
 import FixedButton from '../../fixedButton'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 import { useEffect } from 'react'
 
 
@@ -73,8 +74,8 @@ function WizardForm() {
             axios.post('/laptop/create', body)
               .then(response => console.log(response))
               .catch(error => console.log(error))
-            actions.setSubmitting(false);
-            actions.resetForm()
+            // actions.setSubmitting(false);
+            // actions.resetForm()
           }}
           step={{step, setStep}}
         >
@@ -100,6 +101,9 @@ function WizardForm() {
                     დამახსოვრება
                   </button>
                 </> 
+              }
+              {
+                // step === 2 <Redirect/>
               }
             </div>
           </Form>
