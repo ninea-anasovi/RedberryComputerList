@@ -69,7 +69,7 @@ function WizardForm() {
           თანამშრომლის ინფო
           {step === 0 && <hr className='w-5/6 mx-4 text-black h-0.5 bg-black border-black mt-2' />}
         </h5>
-        <h5 className='font-bold mx-4' onClick={()=>setStep(1)}>
+        <h5 className='font-bold mx-4 invisible md:visible ' onClick={()=>setStep(1)}>
           ლეპტოპის მახასიათებლები
           {step === 1 && <hr className='w-5/6 mx-4 text-black h-0.5 bg-black border-black mt-2' />}
         </h5>
