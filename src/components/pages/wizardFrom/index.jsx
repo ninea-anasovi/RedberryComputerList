@@ -1,4 +1,3 @@
-import React, { Children } from 'react'
 import {Formik, Form } from 'formik'
 import icon from '../../../assets/images/icon.svg'
 import EmployeeDetails from './EmployeeDetails'
@@ -12,7 +11,9 @@ import { useEffect } from 'react'
 
 
 function WizardForm() {
-  const [step, setStep] = useState(0)
+  const [ step, setStep ] = useState(0)
+  const [ selectedFile, setSelectedFile ] = useState()
+
   const initialvalues = Yup.object({
     name: '',
     surname: '',
@@ -32,7 +33,7 @@ function WizardForm() {
     laptop_price: 0 
   })
 
-  const [ selectedFile, setSelectedFile ] = useState()
+  
 
   return (
     <div className='bg-[#F7F7F7] py-8 h-full '>
@@ -48,7 +49,7 @@ function WizardForm() {
         </h5>
       </div>
       <div className='rounded-lg bg-white md:mx-40  px-4 md:px-32 py-8'>
-        <FormikStepper 
+        <Formik 
           initialValues = {initialvalues}
           validationSchema = {formValidation}
           onSubmit={(values, actions) => {
@@ -77,50 +78,37 @@ function WizardForm() {
           }}
           step={{step, setStep}}
         >
-          <EmployeeDetails/>
-          <ComputerDetails setSelectedFile={setSelectedFile}/>
-        </FormikStepper>
+          <Form>
+            {step === 0 && <EmployeeDetails/>}
+            {step === 1 && <ComputerDetails setSelectedFile={setSelectedFile}/>}
+            <div className='text-right'>
+              {
+              step === 0 
+              && 
+                <button type="button" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8' onClick={() => setStep(step+1)}>
+                  შემდეგი
+                </button>
+              }
+              {
+                step === 1 
+                &&
+                <>
+                  <button type="button" className='text-blue-500 py-4 text-center rounded-md mt-8 float-left' onClick={()=> setStep(step-1)}>
+                    უკან
+                  </button>
+                  <button type="submit" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8'>
+                    დამახსოვრება
+                  </button>
+                </> 
+              }
+            </div>
+          </Form>
+        </Formik>
       </div>
       <img src={icon} alt='Redberry Icon' className='ml-auto mr-auto mt-8 w-16'/>
     </div>
   )
 }
 
-
-
-export function FormikStepper ({ children, ...props }) {
-  const {step, setStep} = props.step
-  const childrenArray = Children.toArray(children);
-  const currentChild = childrenArray[step];
-
-  return (
-    <Formik {...props}>
-      <Form autoComplete='off'>
-        {currentChild}
-        <div className='text-right'>
-          {
-          step === 0 
-          && 
-            <button type="button" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8' onClick={() => setStep(step+1)}>
-              შემდეგი
-            </button>
-          }
-          {
-            step === 1 
-            &&
-            <>
-              <button type="button" className='text-blue-500 py-4 text-center rounded-md mt-8 float-left' onClick={()=> setStep(step-1)}>
-                უკან
-              </button>
-              <button type="submit" className='bg-blue-400 hover:bg-blue-500 text-white py-4 px-4 w-1/4 text-center rounded-md mt-8'>
-                დამახსოვრება
-              </button>
-            </> 
-          }
-        </div>
-      </Form> 
-    </Formik>
-  )
-}
 
 export default WizardForm

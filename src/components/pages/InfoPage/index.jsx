@@ -8,17 +8,37 @@ import FixedButton from '../../fixedButton';
 function InfoPage() {
 
     let { id } = useParams();
-    const [ user, setUser ] = useState()
-    const [ laptop, setLaptop ] = useState()
+    const [ user, setUser ] = useState();
+    const [ laptop, setLaptop ] = useState();
+    const [ teams, setTeams ] = useState([]);
+    const [ positions, setPositions ] = useState([]);
+    const [ brands, setBrands ] = useState([]);
 
     useEffect(() => {
         axios.get(`/laptop/${id}`)
             .then(response => {
                 setUser(response.data.data.user);
                 setLaptop(response.data.data.laptop)
-                console.log(response.data.data.user)
+                console.log(response.data.data.laptop)
             })
             .catch(error => console.log(error))
+        axios.get('/teams')
+        .then(response => {
+            setTeams(response.data.data)
+        })
+        .catch(error => console.log(error))
+        axios.get('/positions')
+        .then(response => {
+            setPositions(response.data.data)
+        })
+        .catch(error => console.log(error))
+        axios.get('/brands')
+        .then(response => {
+            setBrands(response.data.data)
+        })
+        .catch(error => console.log(error))
+        console.log(brands)
+        console.log(teams)
     }, [])
 
   return (
@@ -35,9 +55,9 @@ function InfoPage() {
                 <p className='text-md font-bold'>სახელი:</p>
                 <p>{user?.name} {user?.surname}</p>
                 <p className='text-md font-bold'>თიმი:</p>
-                <p>დიზაინერები</p>
+                <p>{teams[user?.team_id]?.name}</p>
                 <p className='text-md font-bold'>პოზიცია:</p>
-                <p>ილუსტრატორი</p>
+                <p>{positions[user?.position_id]?.name}</p>
                 <p className='text-md font-bold'>მეილი:</p>
                 <p>{user?.email}</p>
                 <p className='text-md font-bold'>ტელ. ნომერი:</p>
@@ -49,31 +69,31 @@ function InfoPage() {
                 <p className='text-md font-bold'>ლეპტოპის სახელი:</p>
                 <p>{laptop?.name}</p>
                 <p className='text-md font-bold'>ლეპტოპის ბრენდი:</p>
-                <p >ილუსტრატორი</p>
+                <p>{brands[laptop?.brand_id]?.name}</p>
                 <p className='text-md font-bold'>RAM:</p>
-                <p>ako@redberry.com</p>
+                <p>{laptop?.ram}</p>
                 <p className='text-md font-bold'>მეხსიერების ტიპი:</p>
-                <p>+995 599 99 99 99</p>
+                <p>{laptop?.hard_drive_type}</p>
             </div>
             <div className='grid grid-cols-2 gap-1 md:gap-4'>
                 <p className='text-md font-bold'>CPU:</p>
-                <p>დიზაინერები</p>
+                <p>{laptop?.cpu.name}</p>
                 <p className='text-md font-bold'>CPU-ს ბირთვი:</p>
-                <p >ილუსტრატორი</p>
+                <p>{laptop?.cpu.cores}</p>
                 <p className='text-md font-bold'>CPU-ს ნაკადი:</p>
-                <p>ako@redberry.com</p>
+                <p>{laptop?.cpu.threads}</p>
             </div>
         </div>
         <div className='grid md:grid-cols-2 items-start border-t my-6 md:my-16 border-gray-300 pt-6 md:pt-16'>
             <div className='grid grid-cols-2 gap-1 md:gap-4'>
                 <p className='text-md font-bold'>ლეპტოპის მდგომარეობა:</p>
-                <p>დიზაინერები</p>
+                <p>{laptop?.state === 'new' ? 'ახალი' : 'ძველი'}</p>
                 <p className='text-md font-bold'>ლეპტოპის ფასი:</p>
-                <p >1500 ₾</p>
+                <p >{laptop?.price} ₾</p>
             </div>
             <div className='grid grid-cols-2 '>
                 <p className='text-md font-bold'>შევსების რიცხვი:</p>
-                <p>12 / 03 / 2022</p>
+                <p>{laptop?.purchase_date}</p>
             </div>
         </div>
     </div>

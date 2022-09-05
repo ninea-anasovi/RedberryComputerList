@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useField } from 'formik'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
@@ -6,9 +7,20 @@ import FormDropdown from './FormDropdown'
 import FormInput from './FormInput'
 
 
-function EmployeeDetails() {
-    const [teams, setTeams] = useState([])
-    const [positions, setPositions] = useState([])
+function EmployeeDetails({values}) {
+    const [ teams, setTeams ] = useState([])
+    const [ positions, setPositions ] = useState([])
+    const [ teamID, setTeamID ] = useState()
+    const [ field ] = useField('team_id')
+    
+
+    useEffect(() => {
+        setPositions(
+            positions.filter((position) => {
+                return position.team_id == teamID;
+            })
+        )
+    },[teamID])
 
     useEffect(()=>{
         axios.get('/teams').then(response => {
@@ -25,7 +37,7 @@ function EmployeeDetails() {
                 <FormInput name={'name'} type={'text'}label={'სახელი'} placeholder={'გივი'} text={'მინიმუმ 2 სიმბოლო, ქართული ასოებით'}/>
                 <FormInput name={'surname'} type={'text'} label={'გვარი'} placeholder={'ბაგრატიონი'}  text={'მინიმუმ 2 სიმბოლო, ქართული ასოებით'}/>
             </div>                
-            <FormDropdown name={'team_id'} options={teams} label='თიმი' />
+            <FormDropdown name={'team_id'} options={teams} label='თიმი' setTeamID={setTeamID}/>
             <FormDropdown name={'position_id'} options={positions} label='პოზიცია'/>
             <FormInput name={'email'} type={'email'} label={'მეილი'} placeholder={'მეილი'} text={'უნდა მთავრდებოდეს @redberry.ge-ით'}/>
             <FormInput  name={'phone_number'} type={'text'} label={'ტელეფონის ნომერი'} placeholder={'+995'} text={'უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს'}/>
