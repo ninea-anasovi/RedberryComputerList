@@ -8,7 +8,7 @@ function Card({laptopData}) {
         <div className="flex items-center bg-blue-50 rounded-[15px] border border-blue-100 flex-row">
         <img 
           className="object-cover h-32 w-1/2 md:h-48 rounded-[10px] mx-2 my-2" 
-          src={`${process.env.REACT_APP_REDBERRY_IMAGE_BASE_URL}${laptopData.laptop.image}`} 
+          src={process.env.REACT_APP_REDBERRY_IMAGE_BASE_URL + laptopData.laptop.image} 
           alt="laptop_image"
         />
         <div className="flex flex-col justify-between p-4 leading-normal">
