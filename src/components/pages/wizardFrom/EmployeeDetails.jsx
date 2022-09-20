@@ -20,6 +20,7 @@ function EmployeeDetails({values}) {
                 return position.team_id == teamID;
             })
         )
+        console.log('working')
     },[teamID])
 
     useEffect(()=>{

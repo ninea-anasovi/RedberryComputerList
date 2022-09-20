@@ -12,6 +12,7 @@ function List() {
   useEffect(() => {
     axios.get('/laptops').then(response => {
       setLaptopsData(response.data.data)
+      console.log('listebis motxovna')
     })
   },[])
 

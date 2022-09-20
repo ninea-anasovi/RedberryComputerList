@@ -19,25 +19,27 @@ function InfoPage() {
             .then(response => {
                 setUser(response.data.data.user);
                 setLaptop(response.data.data.laptop)
+                console.log('laptopId motxovna')
             })
-            .catch(error => console.log(error))
+            .catch(error => console.log('ID ERROR!!!!!!!!!!!!!!'))
         axios.get('/teams')
         .then(response => {
             setTeams(response.data.data)
+            console.log('team motxovna')
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log('teams ERROR!!!!!!!!!!!!!!'))
         axios.get('/positions')
         .then(response => {
             setPositions(response.data.data)
+            console.log('poziciebis motxovna')
         })
-        .catch(error => console.log(error))
+        .catch(error => console.log('poziciebis ERROR!!!!!!!!!!!!!!'))
         axios.get('/brands')
         .then(response => {
             setBrands(response.data.data)
+            console.log('brendebis motxovna')
         })
-        .catch(error => console.log(error))
-        console.log(brands)
-        console.log(teams)
+        .catch(error => console.log('brandebis ERROR!!!!!!!!!!!!!!'))
     }, [])
 
   return (
